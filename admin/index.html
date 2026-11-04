@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Card Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <section class="gate" id="gate">
+    <h1>Card Studio</h1>
+    <p id="gateText">Sign in with the business Google account to create client cards.</p>
+    <div id="googleButton"></div>
+    <p class="message" id="gateMessage" role="alert"></p>
+  </section>
+
+  <div class="studio" id="studio" hidden>
+    <header class="topbar">
+      <h1>Card Studio</h1>
+      <nav>
+        <button class="text-btn" type="button" id="navNew">New card</button>
+        <button class="text-btn" type="button" id="navCards">Saved cards</button>
+        <button class="text-btn" type="button" id="navSignOut">Sign out</button>
+      </nav>
+    </header>
+
+    <form class="phone" id="editor" novalidate>
+      <h2 id="editorTitle">New visit card</h2>
+      <label class="photo-picker">
+        <div class="portrait" id="photoPreview">Add profile picture</div>
+        <input type="file" id="photoInput" accept="image/*" aria-label="Profile picture">
+      </label>
+      <p class="hint" id="photoHint">Tap the circle to choose a photo</p>
+
+      <label class="field"><span>Full name</span>
+        <input id="fullName" autocomplete="off" maxlength="80" required>
+      </label>
+      <label class="field"><span>Phone number</span>
+        <input id="phone" type="tel" inputmode="tel" autocomplete="off" placeholder="+998 90 123 45 67">
+      </label>
+      <label class="field"><span>Instagram link</span>
+        <input id="instagram" inputmode="url" autocapitalize="none" autocomplete="off" placeholder="https://instagram.com/username">
+      </label>
+      <label class="field"><span>Telegram link</span>
+        <input id="telegram" inputmode="url" autocapitalize="none" autocomplete="off" placeholder="https://t.me/username">
+      </label>
+
+      <p class="message" id="formMessage" role="alert"></p>
+      <button class="btn primary" type="submit" id="saveButton">Create QR code</button>
+    </form>
+
+    <section class="phone" id="result" hidden>
+      <h2 id="resultName"></h2>
+      <p class="warning" id="domainWarning" hidden>This QR code uses a GitHub address. Set your own domain in config.js before printing it.</p>
+      <div class="qr-box" id="qrBox"></div>
+      <p class="link-out"><a id="cardLink" target="_blank" rel="noopener"></a></p>
+      <div class="actions">
+        <button class="btn primary" type="button" id="downloadSvg">Download SVG</button>
+        <button class="btn" type="button" id="downloadPng">Download PNG</button>
+        <button class="btn wide" type="button" id="copyLink">Copy link</button>
+      </div>
+      <div class="center">
+        <button class="text-btn" type="button" id="editCard">Edit this card</button>
+      </div>
+    </section>
+
+    <section id="cards" hidden>
+      <label class="field search"><span>Find a card</span>
+        <input id="search" type="search" autocomplete="off">
+      </label>
+      <p class="hint" id="listStatus" role="status"></p>
+      <ul class="list" id="cardList"></ul>
+    </section>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../assets/common.js"></script>
+  <script src="../assets/qrcode.js"></script>
+  <script src="../assets/admin.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer onload="window.vcGoogleReady && window.vcGoogleReady()"></script>
+</body>
+</html>
